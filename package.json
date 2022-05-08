@@ -1,0 +1,29 @@
+{
+  "name": "NodeJS-16",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "node": "^16.13.0"
+  },
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "discord-buttons": "^4.0.0-deprecated",
+    "discord.js": "^13.4.0",
+    "discordjs-button-pagination": "^3.0.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "figlet": "^1.5.2",
+    "mongoose": "^6.1.4",
+    "noblox.js": "^4.12.0",
+    "node-fetch": "^2.6.6",
+    "reconlx": "^2.5.2"
+  }
+}
