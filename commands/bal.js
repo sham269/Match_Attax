@@ -1,7 +1,6 @@
 const Discord = require("discord.js");
 const mongoose = require('mongoose')
 const User = require('../models/user.js')
-const Card = require('../models/card.js')
 const cooldowns = new Map();
 const nf = new Intl.NumberFormat()
 require('dotenv').config();
@@ -24,31 +23,29 @@ exports.run = async (client, message, args) => {
     const cooldownEmbed = new Discord.MessageEmbed()
     .setColor(16735840)
     .setDescription('You have just used this command. Try again in `' + `${h}` + ':' + `${m}` + ':' + `${s}` + '`.')
-    message.channel.send({ embeds: [cooldownEmbed] });
-  } else {
-   User.findOne({
-         userId: message.author.id
-            }, (err, user) => {
-          if(err) console.log(err)
-          else{
-              
-        const dailyEmbed = new Discord.MessageEmbed()
-          .setColor(5355891)
-          .setDescription('2000 ⬡ Claimed!')
+    message.channel.send({ embeds: [cooldownEmbed] })
+    } else {
+  User.findOne({
+    userId: message.author.id
+  }, (err, money) => {
+    if(err) console.log(err)
     
-          .setFooter('URFA Sage')
-          
-        //SHAM ADD EMBED FORMATTING
-        message.channel.send({embeds:[dailyEmbed]})
-            user.userBalance = user.userBalance + 2000
-        user.save().catch(err => console.log(err))
-            
-          }
-            
-     })
-    
-  }
 
-  cooldowns.set(message.author.id, Date.now() + 86400000);
-  setTimeout(() => cooldowns.delete(message.author.id), 86400000);
+    if(!money) {
+      const balanceEmbed = new Discord.MessageEmbed() 
+      .setColor(6355594)
+      .setDescription('`' + `${message.author.username}` + '` has a transfer budget of `0 ⬡` 💸')
+      message.channel.send({ embeds: [balanceEmbed] })
+    } else {
+      var ub = nf.format(money.userBalance)
+      const balanceEmbed = new Discord.MessageEmbed() 
+      .setColor(6355594)
+      .setDescription('`' + `${message.author.username}` + '` has a transfer budget of `' + `${ub} ⬡` + '` 💸')
+      message.channel.send({ embeds: [balanceEmbed] })
+    }
+  })
+  
+  cooldowns.set(message.author.id, Date.now() + 10000);
+  setTimeout(() => cooldowns.delete(message.author.id), 10000);
+  }
 }
