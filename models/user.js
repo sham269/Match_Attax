@@ -8,7 +8,9 @@ const userSchema = mongoose.Schema({
   ownedCards: Array,
   userStarterTeam: Array,
   totalStats:Number,
-  totalRating:Number
+  totalRating:Number,
+  teamName:String,
+  dailyStreak:Number
 })
 
 module.exports = mongoose.model("User", userSchema)

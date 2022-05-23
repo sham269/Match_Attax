@@ -53,11 +53,18 @@ exports.run = async (client, message, args) => {
       if (!user) {
         const newMoney = new User({
 
+          username:message.author.username,
           userId: message.author.id,
           userBalance: 0,
           userArenaRank: 50,
           ownedCards: [],
           userStarterTeam: [],
+          totalStats: 0,
+          totalRating:0,
+          teamName:"Reph is bad",
+          dailyStreak:0
+          
+          
         });
         newMoney.save().catch((err) => console.log(err));
         const recordembed = new Discord.MessageEmbed()
@@ -126,6 +133,8 @@ exports.run = async (client, message, args) => {
               //collected.channel.send({content:value})
               if (value === "Rookie") {
                 var item = docs[Math.floor(Math.random() * docs.length)];
+                user.ownedCards.push(item._id)
+                  user.save().catch(err => console.log(err))
                 const claimEmbed = new Discord.MessageEmbed()
                   .setTitle(item.cardName + ' Joins Your 11!')
                   .setColor(6355594)
@@ -136,6 +145,8 @@ exports.run = async (client, message, args) => {
               }
               else if (value === "Icons") {
                 var item = docs[Math.floor(Math.random() * docs.length)];
+                user.ownedCards.push(item._id)
+                  user.save().catch(err => console.log(err))
                 const claimEmbed = new Discord.MessageEmbed()
                   .setTitle(item.cardName + ' Joins Your 11!')
                   .setColor(6355594)
@@ -146,6 +157,9 @@ exports.run = async (client, message, args) => {
               }
               else if (value === "Heroes") {
                 var item = docs[Math.floor(Math.random() * docs.length)];
+                user.ownedCards.push(item._id)
+                  user.save().catch(err => console.log(err))
+                
                 const claimEmbed = new Discord.MessageEmbed()
                   .setTitle(item.cardName + ' Joins Your 11!')
                   .setColor(6355594)
